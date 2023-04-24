@@ -117,3 +117,10 @@ CALCULATE(
     -- minimalni datum
     MIN(data[Datum]),
     data[Srazky]>0)
+
+________________________________________________
+
+14 srazky kumulativne = 
+CALCULATE(
+    SUM(data[Srazky]),
+    dim_datumy[mesic] <= SELECTEDVALUE(dim_datumy[mesic]))
