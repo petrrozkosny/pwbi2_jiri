@@ -228,3 +228,18 @@ VAR tabulka_rank = ADDCOLUMNS(tabulka,"rank srazek",RANKX(tabulka,[mesicni_srazk
 return 
 IF(
 MINX(FILTER(tabulka_rank,dim_datumy[mesic] = SELECTEDVALUE(dim_datumy[mesic])),[rank srazek])<=3,"CYAN")
+
+_______________________________________________
+
+24 lokality s rocnimi srazkami = 
+if(ISFILTERED(dim_datumy[rok]),
+CONCATENATEX(
+filter(
+    ADDCOLUMNS(
+        VALUES(dim_lokality[Lokalita]),
+    "rocni srazky",
+    CALCULATE(SUM(data[Srazky]))
+    )
+,[rocni srazky] > 1000)
+,dim_lokality[Lokalita],", "
+,BLANK()))
