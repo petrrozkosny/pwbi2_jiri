@@ -12,6 +12,6 @@ ____________________________________________________________
 ceske_lokality = 
 -- SELECT dim_lokality[Lokalita] FROM dim_lokality
 -- WHERE dim_lokality[Zeme] = "Cesko"
-CALCULATETABLE(
-    VALUES(dim_lokality[Lokalita]),
-dim_lokality[Zeme] = "Cesko")
+UNION(
+FILTER(dim_lokality,dim_lokality[Zeme] = "Cesko"),
+ROW("Lokalita","Ostatni","Mesto","Ostatni","Zeme","Ostatni"))
