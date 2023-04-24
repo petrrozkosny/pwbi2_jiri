@@ -109,3 +109,11 @@ CALCULATE(
 CALCULATE(
     SUM(data[Srazky]),
     dim_datumy[rok] <= SELECTEDVALUE(dim_datumy[rok]))
+______________________________________________
+
+13 poprve prselo = 
+-- v danem roce, lokalite
+CALCULATE(
+    -- minimalni datum
+    MIN(data[Datum]),
+    data[Srazky]>0)
