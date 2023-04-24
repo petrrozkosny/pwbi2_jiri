@@ -139,3 +139,47 @@ CALCULATE(
     SUM(data[Srazky]),
     dim_datumy[rok] = SELECTEDVALUE(dim_datumy[rok]) - 1)
   
+_______________________________________
+
+17 kontrola ruzyne = 
+
+VAR max_teplota = MAX(data[Teplota])
+VAR max_teplota_ruzyne = CALCULATE(MAX(data[Teplota]),dim_lokality[Lokalita]= "RUZYNE")
+
+RETURN
+    IF(max_teplota_ruzyne = max_teplota,"max teplota", "nebyla max teplota")
+
+________________________________________
+
+18 pocet destivych dnu ruzyne kumulativne = 
+CALCULATE(
+    COUNT(data[Datum]),
+    dim_lokality[Lokalita] = "RUZYNE",
+    data[Srazky] >0,
+    dim_datumy[mesic] <= SELECTEDVALUE(dim_datumy[mesic]))
+    
+  ______________
+  
+  19  minimalni datum max teploty ruzyne = 
+
+-- max teplota ruzyni
+VAR max_teplota_ruzyne = 
+CALCULATE(
+    MAX(data[Teplota]),
+    dim_lokality[Lokalita] = "RUZYNE")
+
+return
+CALCULATE(
+    MIN(data[Datum]),
+    dim_lokality[Lokalita] = "RUZYNE",
+    data[Teplota] = max_teplota_ruzyne)
+    
+____________________________
+20 lokality se srazkami nad 100 = 
+
+    COUNTX(
+    FILTER(
+    ADDCOLUMNS(
+    VALUES(data[Lokalita]),
+    "suma srazek",CALCULATE(SUM(data[Srazky]))),
+    [suma srazek] >100),data[Lokalita])
