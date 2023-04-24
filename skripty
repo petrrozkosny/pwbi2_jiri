@@ -197,3 +197,20 @@ MAXX(
     CALCULATE(SUM(data[Srazky])))
 RETURN
 IF(srazky = maximalni_mesicni_srazky,"CYAN")
+
+
+_____________________________________________
+
+22 rank srazek = 
+
+VAR tabulka = 
+
+    ADDCOLUMNS(
+    ALL(dim_datumy[mesic]),
+    "mesicni_srazky",
+    CALCULATE(SUM(data[Srazky])))
+
+VAR tabulka_rank = ADDCOLUMNS(tabulka,"rank srazek",RANKX(tabulka,[mesicni_srazky]))
+
+return 
+MINX(FILTER(tabulka_rank,dim_datumy[mesic] = SELECTEDVALUE(dim_datumy[mesic])),[rank srazek])
