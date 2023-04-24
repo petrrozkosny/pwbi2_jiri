@@ -243,3 +243,29 @@ filter(
 ,[rocni srazky] > 1000)
 ,dim_lokality[Lokalita],", "
 ,BLANK()))
+
+__________________________________________________________________
+
+25 suma srazek kumulativne zeme = 
+
+
+CALCULATE(
+    SUM(data[Srazky]),
+    dim_datumy[mesic] <= SELECTEDVALUE(dim_datumy[mesic]),
+    ALL(dim_lokality[Lokalita]),
+    dim_lokality[Zeme] IN VALUES(dim_lokality[Zeme]))
+    
+    
+_____________________________________________________________________
+
+
+26 nejvyssi mesicni srazky = 
+
+VAR srazky = SUM(data[Srazky])
+VAR maximalni_mesicni_srazky = 
+    MAXX(
+    ALL(dim_datumy[mesic]),
+    CALCULATE(SUM(data[Srazky])))
+
+RETURN  
+IF(srazky = maximalni_mesicni_srazky,"CYAN")
