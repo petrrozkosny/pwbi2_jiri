@@ -60,3 +60,14 @@ CALCULATE(
     SUM(data[Srazky]),
     ALL(dim_datumy[rok]),
     ALL(data[Lokalita]))
+
+_____________________________________________________
+
+07 suma srazek cesko = 
+-- vsechny roky
+
+CALCULATE(
+    SUM(data[Srazky]),
+    ALL(dim_datumy[rok]),
+    all(data[Lokalita]),
+    dim_lokality[Zeme] = "Cesko")
