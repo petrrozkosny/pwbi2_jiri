@@ -100,3 +100,12 @@ CALCULATE(
     MONTH(
     MIN(data[Datum])),
     data[Teplota] = MAX(data[Teplota]))
+ ______________________________________________
+ 
+ 12 suma srazek kumulativne v lokalite = 
+
+-- suma srazek v danem a predchozich letech
+
+CALCULATE(
+    SUM(data[Srazky]),
+    dim_datumy[rok] <= SELECTEDVALUE(dim_datumy[rok]))
