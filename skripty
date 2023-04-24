@@ -6,3 +6,12 @@ SELECTCOLUMNS(
 "kvartal",QUARTER([datum]),
 "mesic",MONTH([datum]),
 "cislo_tydne",WEEKNUM([datum],21))
+
+____________________________________________________________
+
+ceske_lokality = 
+-- SELECT dim_lokality[Lokalita] FROM dim_lokality
+-- WHERE dim_lokality[Zeme] = "Cesko"
+CALCULATETABLE(
+    VALUES(dim_lokality[Lokalita]),
+dim_lokality[Zeme] = "Cesko")
