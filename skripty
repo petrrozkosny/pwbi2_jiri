@@ -91,3 +91,12 @@ __________________________________________________
 CALCULATE(
     COUNT(data[Datum]),
 data[Srazky] >0)
+
+_______________________________
+
+11 mesic max. teploty = 
+
+CALCULATE(
+    MONTH(
+    MIN(data[Datum])),
+    data[Teplota] = MAX(data[Teplota]))
