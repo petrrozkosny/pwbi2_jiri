@@ -83,3 +83,11 @@ CALCULATE(
         ALL(dim_datumy[rok]),
         dim_datumy[rok] = SELECTEDVALUE(dim_datumy[rok])-1)
         )
+__________________________________________________
+
+
+10 pocet dnu prselo = 
+-- pocet dnu v danem roce, lokalite, kdy srazky >0
+CALCULATE(
+    COUNT(data[Datum]),
+data[Srazky] >0)
