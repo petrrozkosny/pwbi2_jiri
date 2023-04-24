@@ -124,3 +124,18 @@ ________________________________________________
 CALCULATE(
     SUM(data[Srazky]),
     dim_datumy[mesic] <= SELECTEDVALUE(dim_datumy[mesic]))
+    
+  _____________________________________________
+  15 suma srazek kumulativne ruzyne = 
+CALCULATE(
+    SUM(data[Srazky]),
+    dim_lokality[Lokalita] = "RUZYNE",
+    dim_datumy[mesic] <=SELECTEDVALUE(dim_datumy[mesic]))
+    
+ ___________________________________________________
+ 
+ 16 suma srazek predchozi rok = 
+CALCULATE(
+    SUM(data[Srazky]),
+    dim_datumy[rok] = SELECTEDVALUE(dim_datumy[rok]) - 1)
+  
