@@ -183,3 +183,17 @@ ____________________________
     VALUES(data[Lokalita]),
     "suma srazek",CALCULATE(SUM(data[Srazky]))),
     [suma srazek] >100),data[Lokalita])
+    
+ ____________________________________________
+ 
+ 21 maximalni mesicni srazky = 
+-- suma srazek v danem mesici a roce
+VAR srazky = SUM(data[Srazky])
+-- suma srazek kazdeho jednoho mesice
+-- z tohoto vypocitat maximum
+VAR maximalni_mesicni_srazky  =
+MAXX(
+    ALL(dim_datumy[mesic]),
+    CALCULATE(SUM(data[Srazky])))
+RETURN
+IF(srazky = maximalni_mesicni_srazky,"CYAN")
