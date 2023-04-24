@@ -15,3 +15,39 @@ ceske_lokality =
 UNION(
 FILTER(dim_lokality,dim_lokality[Zeme] = "Cesko"),
 ROW("Lokalita","Ostatni","Mesto","Ostatni","Zeme","Ostatni"))
+__________________________________________________________
+01 suma srazek = SUM(data[Srazky])
+______________________________________________
+02 srazky ruzyne = 
+
+SUMX(
+    FILTER(
+    ALL(data),
+    data[Lokalita] = "RUZYNE"),
+data[Srazky])
+_____________________________________________________
+03 srazky ruzyne calculate1 = 
+-- takhle ne
+CALCULATE(
+    SUM(data[Srazky]),
+FILTER(
+    ALL(data),
+data[Lokalita] = "RUZYNE"))
+
+_______________________________________________
+
+04 srazky ruzyne calculate2 = 
+// -- takhle ano, pokud nefunguje calculate3
+CALCULATE(
+    SUM(data[Srazky]),
+FILTER(
+    ALL(data[Lokalita]),
+data[Lokalita] = "RUZYNE"))
+
+______________________________________________
+
+05 srazky ruzyne calculate3 = 
+// -- takhle ano
+CALCULATE(
+SUM(data[Srazky]),
+data[Lokalita] = "RUZYNE")
