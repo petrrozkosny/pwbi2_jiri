@@ -51,3 +51,12 @@ ______________________________________________
 CALCULATE(
 SUM(data[Srazky]),
 data[Lokalita] = "RUZYNE")
+
+_________________________________________________
+
+06 suma srazek vse = 
+
+CALCULATE(
+    SUM(data[Srazky]),
+    ALL(dim_datumy[rok]),
+    ALL(data[Lokalita]))
