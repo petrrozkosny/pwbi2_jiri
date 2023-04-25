@@ -269,3 +269,28 @@ VAR maximalni_mesicni_srazky =
 
 RETURN  
 IF(srazky = maximalni_mesicni_srazky,"CYAN")
+___________________________________________________________________
+27 minimalni datum = MIN(dim_datumy[datum])
+___________________________________________________________________
+
+28 minimalni datum roku = 
+CALCULATE(MIN(dim_datumy[datum]),ALL(dim_datumy[mesic]))
+____________________________________________________________________
+29 minimalni datum vse = 
+CALCULATE(MIN(data[Datum]),ALL(dim_datumy[rok],dim_datumy[mesic]))
+____________________________________________________________________
+30 srazky kumulativne = 
+CALCULATE(SUM(data[Srazky]),dim_datumy[mesic]<=SELECTEDVALUE(dim_datumy[mesic]))
+____________________________________________________________________
+31 srazky kumulativne vse = 
+
+CALCULATE(
+    SUM(data[Srazky]),
+    dim_datumy[datum]<=MAX(dim_datumy[datum]))
+    
+_____________________________________________________________________
+32 rozdil max teplot = 
+var _max = MAX(data[Teplota]) 
+VAR _max_all = CALCULATE(MAX(data[Teplota]),
+ALL(dim_datumy[mesic]))
+return _max - _max_all
