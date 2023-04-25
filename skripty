@@ -294,3 +294,77 @@ var _max = MAX(data[Teplota])
 VAR _max_all = CALCULATE(MAX(data[Teplota]),
 ALL(dim_datumy[mesic]))
 return _max - _max_all
+________________________________________________________________________
+
+33 retezec mesice = 
+CONCATENATEX(VALUES(dim_datumy[mesic]),dim_datumy[mesic],", ")
+________________________________________________________________________
+34 retezec mesice vse = 
+CONCATENATEX(ALL(dim_datumy[mesic]),dim_datumy[mesic],", ")
+________________________________________________________________________
+
+35 retezec lokalit = CONCATENATEX(VALUES(data[Lokalita]),data[Lokalita],", ")
+________________________________________________________________________
+36 mesicni srazky lokalit = 
+CONCATENATEX(
+ADDCOLUMNS(
+    VALUES(data[Lokalita]),
+"mesicni srazky",
+    CALCULATE(SUM(data[Srazky]))),[mesicni srazky]
+," ,")
+________________________________________________________________________
+37 lokality max srazek = 
+VAR _tabulka= 
+ADDCOLUMNS(
+    VALUES(data[Lokalita]),
+"mesicni srazky",
+    CALCULATE(SUM(data[Srazky])))
+VAR _max_srazky = MAXX(_tabulka,[mesicni srazky])
+RETURN
+CONCATENATEX(
+        FILTER(_tabulka,[mesicni srazky] = _max_srazky),
+data[Lokalita],", ")
+________________________________________________________________________
+
+38 srazky predchozi rok = 
+-- suma srazek v predchozim roce
+    SWITCH(SELECTEDVALUE(dim_obdobi[Obdobi]),
+    "Rok",
+    CALCULATE(
+    SUM(data[Srazky]),
+    DATEADD(dim_datumy[datum],-1,YEAR)),
+    
+
+    "Mesic",
+     CALCULATE(
+    SUM(data[Srazky]),
+    DATEADD(dim_datumy[datum],-1,MONTH)))
+    
+   _______________________________________________________________________
+   
+   39 suma srazek kumulativne v roce = 
+
+TOTALYTD(
+    SUM(data[Srazky]),
+    dim_datumy[datum])
+    
+ _____________________________________________________________________
+ 
+ 40 suma srazek ceske lokality = 
+CALCULATE(
+    SUM(data[Srazky]),
+    data[Lokalita] = SELECTEDVALUE(ceske_lokality[Lokalita]))
+    
+     _____________________________________________________________________
+    
+    41 suma srazek userelationship = 
+CALCULATE(
+    SUM(data[Srazky]),
+ USERELATIONSHIP(dim_stanice[STATION],data[STATION]))
+  _____________________________________________________________________
+ 
+42 pocet zemi otoceni relace = 
+CALCULATE(
+    COUNT(dim_lokality[Zeme]),
+    CROSSFILTER(data[Lokalita],dim_lokality[Lokalita],Both))
+    
