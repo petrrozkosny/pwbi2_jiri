@@ -377,3 +377,18 @@ ROW("Obdobi","rok"),
 ROW("Obdobi","mesic"))
 
   _____________________________________________________________________
+43 nazev grafu = 
+
+SWITCH(TRUE(),
+HASONEVALUE(dim_lokality[Lokalita]),
+"Suma srazek v lokalite " &SELECTEDVALUE(dim_lokality[Lokalita]),
+ISFILTERED(dim_lokality[Lokalita]),
+"Suma srazek v lokalitach "&CONCATENATEX(values(dim_lokality[Lokalita]), dim_lokality[Lokalita],", "),
+"Suma srazek ve vsech lokalitach")
+
+_________________________________________
+
+44 summarize = 
+MAXX(
+SUMMARIZE(data,data[Lokalita],"rocni srazky",SUM(data[Srazky])),
+[rocni srazky])
