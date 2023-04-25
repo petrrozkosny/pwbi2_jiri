@@ -1,0 +1,31 @@
+
+27. Minimální datum v daném roce a daném měsíci
+28. Minimální datum v daném roce, tj. napříč měsíci
+29. Minimální datum vše, tj. napříč roky a měsíci
+________________________________________________________________
+Přestávka do 10:37
+________________________________________________________________
+
+30. Spočítejte kumulativní sumu srážek v daném roce a měsíci (tj. suma srážek za daný a předcházející
+měsíce v daném roce)
+31. Spočítejte kumulativní sumu srážek od počátku věků (tj. za všechny předcházející měsíce a roky)
+32. Spočítejte rozdíl mezi maximální teplotou v daném měsíci a roce a maximální teplotou v daném roce
+napříč měsíci.
+_________________________________________________________
+
+33. Řetězte (spojte) za sebe měsíce v daném roce a měsici
+34. Řetězce (spojte) za sebe měsíce v daném roce (tj. rušíme filtr aktuálního měsíce)
+35. Řetězte (spojte) za sebe názvy jednotlivých lokalit, které jsou v tabulce data
+pro daný rok a měsíc
+36. V rámci virtuální tabulky si spočítejte lokalita, "mesicni srazky" (suma srážek pro daný měsíc a rok)
+a následně zřetězte (spojte za sebe) jednotlivé hodnoty ze sloupce "mesicni srazky"
+
+TĚŽKÝ BONUS
+37 Lokalita maximálních měsíčních srážek v daném měsíci a roce
+(řetězec těchto lokalit)
+
+
+
+
+
+
